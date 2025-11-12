@@ -19,20 +19,42 @@
     </header>
 
 <!--hero slideshow-->
-    <section class="slideshow">
-        <div class="slide fade">
-            <img src="images/cc71.jpg" alt="Coffee cup on table">
-            <div class="caption">Experience the Art of Coffee</div>
-        </div>
-        <div class="slide fade">
-            <img src="images/cp71.jpg" alt="Barista making coffee">
-            <div class="caption">Crafted with Passion</div>
-        </div>
-        <div class="slide fade">
-            <img src="images/cv71.jpg" alt="Friends enjoying coffee">
-            <div class="caption">Connecting People One Cup at a Time</div>
-        </div>
-    </section>
+    
+    <section class="hero-carousel">
+  <div class="slides">
+    <div class="slide fade">
+      <img src="images/cc71.jpg" alt="Freshly brewed coffee">
+      <div class="caption">Start Your Day with Nunu Coffee ☕</div>
+    </div>
+
+    <div class="slide">
+      <img src="images/cp71.jpg" alt="Coffee beans">
+      <div class="caption">Roasted with Love & Passion</div>
+    </div>
+
+    <div class="slide">
+      <img src="images/cv71.jpg" alt="Barista art">
+      <div class="caption">Crafted by the Best Baristas</div>
+    </div>
+  </div>
+
+ <!-- Navigation arrows (use buttons for reliability) -->
+
+<button class="prev" aria-label="Previous slide"
+type="button">&#10094;</button>
+<button class="next" aria-label="Next slide"
+type="button">&#10095;</button>
+
+<!-- Dots -->
+<div class="dots" aria-hidden="false">
+<button class="dot" data-slide="1" type="button"
+aria-label="Go to slide 1"></button>
+<button class="dot"  data-slide="2" type="button"
+aria-label="Go to slide 2"></button>    
+ <button class="dot" data-slide="3" type="button"
+aria-label="Go to slide 3"></button>
+</div>
+</section>
 
 <!-- Gallery Section -->
     <section class="gallery">
@@ -66,20 +88,65 @@
     <footer>
         <p>© 2025 Nestle Coffee. All rights reserved.</p>
     </footer>
-    
-    <script>
-let slideIndex = 0;
-showSlides();
-function showSlides() {
-    let slides = document.getElementsByClassName("slide");
-    for (let i = 0; i < slides.length; i++) {
-         slides[i].style.display = "none";
+
+   <script>
+(function() {
+  try {
+    const slides = Array.from(document.querySelectorAll('.hero-carousel .slide'));
+    const prevBtn = document.querySelector('.hero-carousel .prev');
+    const nextBtn = document.querySelector('.hero-carousel .next');
+    const dots = Array.from(document.querySelectorAll('.hero-carousel .dot'));
+    if (!slides.length || !prevBtn || !nextBtn || !dots.length) {
+      console.warn('Carousel: missing elements', { slides, prevBtn, nextBtn, dots });
+      return;
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";   
-    setTimeout(showSlides, 4000); // Change image every 4 seconds
-}
-    </script>
+
+    let index = 0;
+    let timer = null;
+    const AUTO_DELAY = 4000;
+
+    function showIndex(i) {
+      // wrap
+      index = (i + slides.length) % slides.length;
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === index);
+      });
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === index));
+      resetTimer();
+    }
+
+    function resetTimer() {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => showIndex(index + 1), AUTO_DELAY);
+    }
+
+    // wire buttons
+    prevBtn.addEventListener('click', () => showIndex(index - 1));
+    nextBtn.addEventListener('click', () => showIndex(index + 1));
+
+    // wire dots
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => showIndex(i));
+    });
+
+    // init
+    showIndex(0);
+
+    // accessibility: pause sliding on hover/focus, resume on leave/blur
+    const carousel = document.getElementById('heroCarousel');
+    carousel.addEventListener('mouseenter', () => { if (timer) clearTimeout(timer); });
+    carousel.addEventListener('mouseleave', resetTimer);
+    carousel.addEventListener('focusin', () => { if (timer) clearTimeout(timer); }, true);
+    carousel.addEventListener('focusout', resetTimer, true);
+
+    // expose for debugging (optional)
+    window.__nunuCarousel = { showIndex };
+  } catch (err) {
+    console.error('Carousel init failed:', err);
+  }
+})();
+</script>
+  
+    
 </body>
 </html>
