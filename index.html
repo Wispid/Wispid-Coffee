@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wispid Coffe</title>
+    <title>Wispid Coffee</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+     
     <header>
-        <h1>Wispid Coffee</h1>
-        <nav>
-            <a href="index.html">Home</a>
-             <a href="menu.html">Menu</a>
-              <a href="about.html">About</a>
-               <a href="contact.html">Contact</a>
-        </nav>
+        <div id="navbar"></div>
+      
     </header>
 
-<!--hero slideshow-->
+    <!--hero slideshow-->
     <section class="slideshow">
         <div class="slide fade">
             <img src="images/cc71.jpg" alt="Coffee cup on table">
@@ -34,56 +33,59 @@
         </div>
     </section>
 
-<!-- Gallery Section -->
+    <!-- Gallery Section -->
     <section class="gallery">
         <h2>Coffee</h2>
-       <div class="gallery-grid">
-        <img
-             src="images/cb71.jpg"alt="Latte art">
-        <img
-             src="images/cn71.jpg"alt="Espresso shot">
-        <img
-             src="images/cg71.jpg" alt="Barista brewing">
-        <img
-             src="images/cc71.jpg" alt="Coffee beans">
-        <img
-             src="images/cp71.jpg"  alt="Coffee on table">
-        <img
-             src="images/cv71.jpg" alt="Friends drinking coffee">
-</div>
-</section>
+        <div class="gallery-grid">
+            <img src="images/cb71.jpg" alt="Latte art">
+            <img src="images/cn71.jpg" alt="Espresso shot">
+            <img src="images/cg71.jpg" alt="Barista brewing">
+            <img src="images/cc71.jpg" alt="Coffee beans">
+            <img src="images/cp71.jpg" alt="Coffee on table">
+            <img src="images/cv71.jpg" alt="Friends drinking coffee">
+        </div>
+    </section>
 
-<!-- About Teaser -->
+    <!-- About Teaser -->
 
-<section class="about-teaser">
-<h2>More Than Just Coffee</h2>
-<p>At Nestle Coffee, every cup connects people.
-     From early mornings to late nights, we're here to fuel your story.</p>
-<a href="about.html" class="btn">Learn More About Us</a>
+    <section class="about-teaser">
+        <h2>More Than Just Coffee</h2>
+        <p>At Nestle Coffee, every cup connects people.
+            From early mornings to late nights, we're here to fuel your story.</p>
+        <a href="about.html" class="btn">Learn More About Us</a>
     </section>
 
 
 
-  
+
+
+<script>
+  fetch("navbar.html")
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("navbar").innerHTML = data;
+    });
+</script>
 
     <footer>
         <p>© 2025 Nestle Coffee. All rights reserved.</p>
     </footer>
-    
+
     <script>
-let slideIndex = 0;
-showSlides();
-function showSlides() {
-    let slides = document.getElementsByClassName("slide");
-    for (let i = 0; i < slides.length; i++) {
-         slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";   
-    setTimeout(showSlides, 4000); // Change image every 4 seconds
-}
+        let slideIndex = 0;
+        showSlides();
+        function showSlides() {
+            let slides = document.getElementsByClassName("slide");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 }
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 4000); // Change image every 4 seconds
+        }
     </script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

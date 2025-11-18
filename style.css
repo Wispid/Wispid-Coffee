@@ -5,26 +5,29 @@ body {
   background-color: #fffdf9;
 }
 
-header {
-  background-color: #4b2e05;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
+/* Navbar background color */
+.custom-navbar {
+    background-color: #4b2e05; /* Coffee-brown, change HEX as you like */
 }
 
-nav a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: 500;
-}
-/* 
-nav a.active, nav a:hover {
-  text-decoration: underline;
-} */
 
+/* All text inside navbar white */
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link,
+.custom-navbar .dropdown-toggle,
+.custom-navbar .dropdown-item {
+    color: white !important;
+}
+
+/* Dropdown menu background matches navbar */
+.custom-navbar .dropdown-menu {
+    background-color: #4b2e05;
+}
+
+/* Toggler icon (hamburger) white */
+.custom-navbar .navbar-toggler-icon {
+    filter: invert(1);
+}
 
 .btn {
   background-color: #f2c17d;
@@ -35,10 +38,10 @@ nav a.active, nav a:hover {
   font-weight: bold;
 }
 
-.menu {
+ .menu {
   text-align: center;
   padding: 50px 20px;
-}
+} 
 
 
 
@@ -73,11 +76,11 @@ nav a.active, nav a:hover {
   text-align: center;
 }
 
-form {
+/* form {
   display: flex;
-  flex-direction: column;
+ flex-direction: column; 
   gap: 10px;
-}
+} */
 
 input, textarea, button {
   padding: 10px;
@@ -311,3 +314,10 @@ footer {
     flex-direction: column;
   }
 }
+
+
+.bg-body-tertiary {
+background-color:#4b2e05 !important;
+
+}
+
